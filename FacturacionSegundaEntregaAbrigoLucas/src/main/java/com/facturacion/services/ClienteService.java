@@ -22,10 +22,23 @@ public class ClienteService {
 		return clienteRepository.findById(dni).orElse(null);
 	}
 
-    public Cliente createClient(Cliente cliente) {
-    	cliente.setId(cliente.getDni());
-        return clienteRepository.save(cliente);
-    }
+	public Cliente createClient(Cliente cliente) {
+	    Integer dni = cliente.getDni();
+	    // Verificar si el cliente ya existe en la base de datos
+	    Cliente existingClient = clienteRepository.findById(dni).orElse(null);
+	    
+	    try {
+	    	if (existingClient != null) {
+	    		throw new RuntimeException("El cliente con DNI " + dni + " ya existe en la base de datos.");
+		    } else {
+		       
+		        cliente.setId(dni);
+		        return clienteRepository.save(cliente);
+		    }
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		}
+	}
 
     public Cliente updateClientByDni(Integer dni, Cliente cliente) {
     	try {
@@ -50,6 +63,5 @@ public class ClienteService {
 		}
 	}
 
-    // Otros métodos
 }
 

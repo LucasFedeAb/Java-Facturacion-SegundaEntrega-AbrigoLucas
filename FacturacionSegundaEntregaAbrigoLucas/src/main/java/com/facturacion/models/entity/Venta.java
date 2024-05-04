@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -29,14 +32,18 @@ public class Venta {
     @ManyToOne
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
-
-    @OneToMany(mappedBy = "venta")
+    
+    
+    @OneToMany(mappedBy = "venta", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<ItemVenta> items = new ArrayList<>();
 
     public Venta() {
+    	super();
     }
 
-    //Getters y Setters
+
+	//Getters y Setters
     
     public Integer getId() {
 		return id;

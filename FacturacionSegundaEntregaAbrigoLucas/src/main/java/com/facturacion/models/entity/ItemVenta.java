@@ -1,5 +1,7 @@
 package com.facturacion.models.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -11,7 +13,7 @@ import jakarta.persistence.ManyToOne;
 public class ItemVenta {
 	
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 	
 	private int cantidad;
@@ -22,11 +24,15 @@ public class ItemVenta {
     
     @ManyToOne
     @JoinColumn(name = "venta_id")
+    @JsonBackReference
     private Venta venta;
-    
-    
-    //Getters y Setters
 
+	public ItemVenta() {
+		super();
+	}
+	
+
+	//Getters y Setters
 	public Integer getId() {
 		return id;
 	}
@@ -50,15 +56,13 @@ public class ItemVenta {
 	public void setProducto(Producto producto) {
 		this.producto = producto;
 	}
-
+    
 	public Venta getVenta() {
 		return venta;
 	}
 
+
 	public void setVenta(Venta venta) {
 		this.venta = venta;
 	}
-    
-    
-    
 }

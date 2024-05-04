@@ -1,14 +1,10 @@
 package com.facturacion.models.entity;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.facturacion.models.abstractClass.Persona;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -23,9 +19,6 @@ public class Cliente extends Persona {
 	  	private Integer telefono;
 	  	@Column(name = "direccion")
 		private String direccion;
-	  	
-	  	@OneToMany(mappedBy = "cliente")
-	    private List<Venta> ventas = new ArrayList<>();
 	  	
 	  	
 		// Constructor
@@ -42,15 +35,6 @@ public class Cliente extends Persona {
 	        this.direccion = direccion;
 	    }
 	    
-
-
-		public List<Venta> getVentas() {
-	        return ventas;
-	    }
-
-	    public void setVentas(List<Venta> ventas) {
-	        this.ventas = ventas;
-	    }
 	    
 	    public Integer getId() {
 			return id;
@@ -79,8 +63,5 @@ public class Cliente extends Persona {
 
 		public void setDireccion(String direccion) {
 			this.direccion = direccion;
-		}
-	    
-		
-	 
+		}	
 }

@@ -23,9 +23,6 @@ public class Producto {
 	@Column(name = "stock")
     private int stock;
 	
-
-	//@OneToMany(mappedBy = "producto")
-    //private List<Venta> ventas = new ArrayList<>();
 	
 	//Constructor
 	
@@ -92,7 +89,6 @@ public class Producto {
 	public void setStock(int stock) {
 		this.stock = stock;
 	}
-
 
 	
 }

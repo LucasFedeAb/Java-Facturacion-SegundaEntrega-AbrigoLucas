@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
+import com.facturacion.controllers.dto.ProductoDTO;
 import com.facturacion.models.entity.Producto;
 import com.facturacion.repositories.ProductoRepository;
 
@@ -20,6 +21,15 @@ public class ProductoService {
 	
 	public Producto getProductById(Integer id) {
 		return productoRepository.findById(id).orElse(null);
+	}
+	
+	public ProductoDTO getProductDTOById(Integer id) {
+	    Producto producto = productoRepository.findById(id).orElse(null);
+	    if (producto != null) {
+	        return new ProductoDTO(producto);
+	    } else {
+	        return null;
+	    }
 	}
 
     public Producto createProduct(Producto producto) {
@@ -52,8 +62,5 @@ public class ProductoService {
 		}
 	}
     
-    
-    
-    // Otros métodos
 }
 
