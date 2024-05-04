@@ -29,7 +29,6 @@ public class VentaController {
     private VentaService ventaService;
     
     
-    
     @GetMapping(value = "/", produces = { MediaType.APPLICATION_JSON_VALUE })
     @Transactional
     public ResponseEntity<List<VentaDTO>> getAllSalesWithOriginalPrices() {

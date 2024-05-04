@@ -42,7 +42,6 @@ public class VentaService {
         List<ItemVentaDTO> itemsDTO = ventaDTO.getItems();
         for (ItemVentaDTO itemDTO : itemsDTO) {
             // Obtener producto
-           //ProductoDTO productoDTO = new ProductoDTO(productoService.getProductById(itemDTO.getProducto().getId()));
             ProductoDTO productoDTO = productoService.getProductDTOById(itemDTO.getProducto().getId());
             if (productoDTO == null) {
                 throw new RuntimeException("El producto con ID " + itemDTO.getProducto().getId() + " no existe.");
@@ -108,12 +107,12 @@ public class VentaService {
     }
     
     
-    
+ // Obtener ventas por ID de cliente
     public List<Venta> getAllSales (){
     	return ventaRepository.findAll();
     }
     
-    // Método para obtener ventas por ID de cliente
+    // Obtener ventas por ID de cliente
     public List<Venta> getVentasByClienteId(Integer clienteId) {
         // Implementa la lógica para obtener las ventas de un cliente específico desde el repositorio
         return ventaRepository.findByClienteId(clienteId);
