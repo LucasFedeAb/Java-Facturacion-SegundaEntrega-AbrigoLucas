@@ -20,6 +20,9 @@ public class ProductoDTO {
         this.descripcion = producto.getDescripcion();
         this.precio = producto.getPrecio();
         this.stock = producto.getStock();
+        
+     // Registro de producto creado
+        System.out.println("Se creó un nuevo ProductoDTO a partir de Producto: " + producto.getId());
     }
 
     // Getters y Setters

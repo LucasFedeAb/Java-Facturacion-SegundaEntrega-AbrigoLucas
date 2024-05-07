@@ -14,7 +14,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 
 @Entity
@@ -24,9 +23,7 @@ public class Venta {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-	
-    private Date fechaVenta;
-
+    private String fechaVenta;
     private double montoTotalVenta;
 
     @ManyToOne
@@ -54,12 +51,12 @@ public class Venta {
 	}
 
 
-	public Date getFechaVenta() {
+	public String getFechaVenta() {
 		return fechaVenta;
 	}
 
 
-	public void setFechaVenta(Date fechaVenta) {
+	public void setFechaVenta(String fechaVenta) {
 		this.fechaVenta = fechaVenta;
 	}
 
@@ -92,11 +89,7 @@ public class Venta {
 	public void setItems(List<ItemVenta> items) {
 		this.items = items;
 	}
+	
 
-
-	@PrePersist
-    public void prePersist() {
-        this.fechaVenta = new Date();
-    }
 
 }

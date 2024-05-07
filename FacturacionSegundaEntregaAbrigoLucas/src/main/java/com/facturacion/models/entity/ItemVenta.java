@@ -14,13 +14,18 @@ public class ItemVenta {
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
-	
+	private Integer itemVentaId;
+	private Integer productId;
 	private int cantidad;
-	
-    @ManyToOne
-    @JoinColumn(name = "producto_id")
-    private Producto producto;
+	private String nombre; 
+    private String descripcion;
+    private double precioVenta;
+    private int stock;
+    
+    
+    //@ManyToOne
+    //@JoinColumn(name = "producto_id")
+    //private Producto producto;
     
     @ManyToOne
     @JoinColumn(name = "venta_id")
@@ -30,37 +35,79 @@ public class ItemVenta {
 	public ItemVenta() {
 		super();
 	}
-	
+
 
 	//Getters y Setters
-	public Integer getId() {
-		return id;
+	
+	public Integer getItemVentaId() {
+		return itemVentaId;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+
+	public void setItemVentaId(Integer itemVentaId) {
+		this.itemVentaId = itemVentaId;
+	}
+
+	public Integer getProductId() {
+		return productId;
+	}
+
+
+	public void setProductId(Integer productId) {
+		this.productId = productId;
 	}
 
 	public int getCantidad() {
 		return cantidad;
 	}
 
+
 	public void setCantidad(int cantidad) {
 		this.cantidad = cantidad;
 	}
-
-	public Producto getProducto() {
-		return producto;
+	
+    public String getNombre() {
+		return nombre;
 	}
 
-	public void setProducto(Producto producto) {
-		this.producto = producto;
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
-    
+
+
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+
+
+	public double getPrecioVenta() {
+		return precioVenta;
+	}
+
+
+	public void setPrecioVenta(double precioVenta) {
+		this.precioVenta = precioVenta;
+	}
+
+
+	public int getStock() {
+		return stock;
+	}
+
+
+	public void setStock(int stock) {
+		this.stock = stock;
+	}
+
 	public Venta getVenta() {
 		return venta;
 	}
-
 
 	public void setVenta(Venta venta) {
 		this.venta = venta;

@@ -33,6 +33,11 @@ public class ProductoService {
 	}
 
     public Producto createProduct(Producto producto) {
+    	if(producto.getPrecio() <= 0) {
+    		throw new RuntimeException("El precio debe ser mayor a 0");
+    	} else if (producto.getStock() <= 0) {
+    		throw new RuntimeException("El stock debe ser mayor a 0");
+    	}
         return productoRepository.save(producto);
     }
 

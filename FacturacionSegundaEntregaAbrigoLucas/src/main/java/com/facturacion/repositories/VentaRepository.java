@@ -10,4 +10,5 @@ import com.facturacion.models.entity.Venta;
 @Repository
 public interface VentaRepository extends JpaRepository <Venta, Integer> {
 	List<Venta> findByClienteId(Integer clienteId);
+	List<Venta> findByClienteDni(Integer clienteId);
 }

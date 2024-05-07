@@ -21,6 +21,10 @@ public class ClienteService {
 	public Cliente getClientByDNI(Integer dni) {
 		return clienteRepository.findById(dni).orElse(null);
 	}
+	
+	public Cliente getClientById(Integer id) {
+		return clienteRepository.findById(id).orElse(null);
+	}
 
 	public Cliente createClient(Cliente cliente) {
 	    Integer dni = cliente.getDni();

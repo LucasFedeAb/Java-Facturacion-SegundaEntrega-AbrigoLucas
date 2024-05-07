@@ -1,6 +1,5 @@
 package com.facturacion.controllers;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,14 +16,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.facturacion.controllers.dto.ItemVentaDTO;
-import com.facturacion.controllers.dto.ProductoDTO;
-import com.facturacion.controllers.dto.VentaDTO;
 import com.facturacion.models.entity.Cliente;
-import com.facturacion.models.entity.ItemVenta;
-import com.facturacion.models.entity.Venta;
 import com.facturacion.services.ClienteService;
-import com.facturacion.services.VentaService;
 
 @CrossOrigin(origins = "http://localhost:5173") //Acceder desde react en local
 @RestController
@@ -32,9 +25,7 @@ import com.facturacion.services.VentaService;
 public class ClienteController {
     @Autowired
     private ClienteService clienteService;
-    
-    @Autowired
-    private VentaService ventaService;
+
 
     @PostMapping(value = "/create", consumes = { MediaType.APPLICATION_JSON_VALUE })
     public ResponseEntity<Cliente> createClient(@RequestBody Cliente cliente) {
@@ -63,7 +54,6 @@ public class ClienteController {
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR); // Error 500
 		}
-
 	}
     
     @GetMapping(value = "/cliente/{id}", produces = { MediaType.APPLICATION_JSON_VALUE })
@@ -91,33 +81,4 @@ public class ClienteController {
 		}
 	}
     
-    @GetMapping("/{clienteId}/ventas")
-    public ResponseEntity<List<VentaDTO>> getVentasCliente(@PathVariable("clienteId") Integer clienteId) {
-        List<Venta> ventas = ventaService.getVentasByClienteId(clienteId);
-        List<VentaDTO> ventasDTO = new ArrayList<>();
-
-        for (Venta venta : ventas) {
-            VentaDTO ventaDTO = new VentaDTO();
-            ventaDTO.setId(venta.getId());
-            ventaDTO.setFechaVenta(venta.getFechaVenta());
-            ventaDTO.setMontoTotalVenta(venta.getMontoTotalVenta());
-
-            List<ItemVentaDTO> itemsDTO = new ArrayList<>();
-            for (ItemVenta item : venta.getItems()) {
-                ItemVentaDTO itemDTO = new ItemVentaDTO();
-                itemDTO.setId(item.getId());
-                itemDTO.setCantidad(item.getCantidad());
-                // Aquí deberías mapear el producto a un ProductoDTO si es necesario
-                itemDTO.setProducto(new ProductoDTO(item.getProducto()));
-                itemsDTO.add(itemDTO);
-            }
-            ventaDTO.setItems(itemsDTO);
-
-            ventasDTO.add(ventaDTO);
-        }
-
-        return new ResponseEntity<>(ventasDTO, HttpStatus.OK);
-    }
-
 }
-

@@ -1,28 +1,20 @@
 package com.facturacion.controllers.dto;
 
 public class ItemVentaDTO {
-	private Integer id;
-    private int cantidad;
+	
+	private int cantidad;
     private ProductoDTO producto;
     
 	public ItemVentaDTO() {
 		super();
 	}
 	
-	public ItemVentaDTO(Integer id, int cantidad, ProductoDTO producto) {
+	public ItemVentaDTO( int cantidad, ProductoDTO producto) {
 		super();
-		this.id = id;
 		this.cantidad = cantidad;
 		this.producto = producto;
 	}
 	
-	
-	public Integer getId() {
-		return id;
-	}
-	public void setId(Integer id) {
-		this.id = id;
-	}
 	public int getCantidad() {
 		return cantidad;
 	}
@@ -35,5 +27,5 @@ public class ItemVentaDTO {
 	public void setProducto(ProductoDTO producto) {
 		this.producto = producto;
 	}
-    
+ 
 }

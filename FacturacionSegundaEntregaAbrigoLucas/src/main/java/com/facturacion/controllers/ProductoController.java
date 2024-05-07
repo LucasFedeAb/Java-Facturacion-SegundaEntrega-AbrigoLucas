@@ -26,6 +26,21 @@ public class ProductoController {
     @Autowired
     private ProductoService productoService;
     
+    @PostMapping(value = "/create", consumes = { MediaType.APPLICATION_JSON_VALUE })
+    public ResponseEntity<Producto> createProduct(@RequestBody Producto producto) {
+    	productoService.createProduct(producto);
+		return new ResponseEntity<>(producto, HttpStatus.CREATED); // Codigo 201
+	}
+    
+    @PutMapping(value = "/{id}/update", consumes = { MediaType.APPLICATION_JSON_VALUE })
+	public ResponseEntity<Producto> updateProduct(@PathVariable("id") Integer id, @RequestBody Producto producto) {
+    	Producto productUpdated = productoService.updateProductById(id, producto);
+		if (productUpdated != null) {
+			return new ResponseEntity<>(productUpdated, HttpStatus.OK); // Codigo 200
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND); // Error 404
+		}
+	}
     
     @GetMapping (value = "/", produces = { MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<List<Producto>> getAllProducts() {
@@ -55,22 +70,6 @@ public class ProductoController {
 	}
 
     
-    @PostMapping(value = "/create", consumes = { MediaType.APPLICATION_JSON_VALUE })
-    public ResponseEntity<Producto> createProduct(@RequestBody Producto producto) {
-    	productoService.createProduct(producto);
-		return new ResponseEntity<>(producto, HttpStatus.CREATED); // Codigo 201
-	}
-    
-    @PutMapping(value = "/{id}/update", consumes = { MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<Producto> updateProduct(@PathVariable("id") Integer id, @RequestBody Producto producto) {
-    	Producto productUpdated = productoService.updateProductById(id, producto);
-		if (productUpdated != null) {
-			return new ResponseEntity<>(productUpdated, HttpStatus.OK); // Codigo 200
-		} else {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND); // Error 404
-		}
-	}
-    
     @DeleteMapping(value = "/{id}/delete")
 	public ResponseEntity<Void> deleteProduct(@PathVariable("id") Integer id) {
 		boolean deletedProduct = productoService.deleteProductById(id);
@@ -81,4 +80,3 @@ public class ProductoController {
 		}
 	}
 }
-

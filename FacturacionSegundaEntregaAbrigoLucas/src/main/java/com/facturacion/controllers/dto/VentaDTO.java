@@ -6,7 +6,7 @@ import java.util.List;
 public class VentaDTO {
 	
 	private Integer id;
-	private Date fechaVenta;
+	private String fechaVenta;
     private double montoTotalVenta;
     private ClienteDTO cliente;
     private List<ItemVentaDTO> items;
@@ -16,7 +16,7 @@ public class VentaDTO {
 		super();
 	}
 	
-	 public VentaDTO(Integer id, Date fechaVenta, double montoTotalVenta, ClienteDTO cliente, List<ItemVentaDTO> items) {
+	 public VentaDTO(Integer id, String fechaVenta, double montoTotalVenta, ClienteDTO cliente, List<ItemVentaDTO> items) {
 	        this.id = id;
 	        this.fechaVenta = fechaVenta;
 	        this.montoTotalVenta = montoTotalVenta;
@@ -32,11 +32,11 @@ public class VentaDTO {
 	}
 	
 	
-	public Date getFechaVenta() {
+	public String getFechaVenta() {
 		return fechaVenta;
 	}
 
-	public void setFechaVenta(Date fechaVenta) {
+	public void setFechaVenta(String fechaVenta) {
 		this.fechaVenta = fechaVenta;
 	}
 
